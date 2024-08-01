@@ -1,9 +1,7 @@
 "use server";
 
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/globals/db";
 import { hash } from "bcryptjs";
-
-const prisma = new PrismaClient();
 
 export async function registerUser(formData: FormData) {
   const email = formData.get("email") as string;

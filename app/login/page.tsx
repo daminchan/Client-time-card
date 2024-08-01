@@ -79,7 +79,7 @@ export default function LoginPage() {
           </FormControl>
           <FormControl isRequired>
             <FormLabel>パスワード</FormLabel>
-            <Input type="password" name="password" minLength={8} />
+            <Input type="password" name="password" minLength={4} />
           </FormControl>
           <Button
             type="submit"
