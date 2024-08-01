@@ -27,4 +27,6 @@ model TimeCard {
   date      DateTime
   startTime DateTime?
   endTime   DateTime?
+
+  @@unique([userId, date])
 }

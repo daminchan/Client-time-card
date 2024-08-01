@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Box, Heading, Text } from "@chakra-ui/react";
 import LogoutButton from "@/components/button/LogoutButton";
+import NavButton from "@/components/nav/NavButton";
 
 export default function ProtectedPage() {
   const { data: session, status } = useSession();
@@ -28,6 +29,7 @@ export default function ProtectedPage() {
     <Box p={5}>
       <Heading mb={4}>保護されたページ</Heading>
       <Text mb={4}>ようこそ、{session.user?.name}さん！</Text>
+      <NavButton label="マイページ" href="/protected/my-page" />
       <LogoutButton />
     </Box>
   );
