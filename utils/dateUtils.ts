@@ -1,5 +1,5 @@
-import { format, toZonedTime } from "date-fns-tz";
 import { ja } from "date-fns/locale";
+import { format, toZonedTime } from "date-fns-tz";
 
 export const formatDate = (date: Date): string => {
   return format(toZonedTime(date, "Asia/Tokyo"), "yyyy/MM/dd", { locale: ja });

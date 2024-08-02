@@ -1,7 +1,9 @@
 "use server";
-import { prisma } from "@/globals/db";
-import { TimeCard } from "../types";
 import { revalidatePath } from "next/cache";
+
+import { prisma } from "@/globals/db";
+
+import { TimeCard } from "../types";
 
 export async function clockIn(userId: string) {
   const lastUnfinishedWork = await prisma.timeCard.findFirst({

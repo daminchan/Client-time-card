@@ -1,11 +1,11 @@
-import { redirect } from "next/navigation";
-
 import { Heading, Text } from "@chakra-ui/react";
-import LogoutButton from "@/components/button/LogoutButton";
-
-import FlexCol from "@/components/ui/FlexCol";
-import NavButton from "@/components/button/NavButton";
+import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
+
+import LogoutButton from "@/components/button/LogoutButton";
+import NavButton from "@/components/button/NavButton";
+import FlexCol from "@/components/ui/FlexCol";
+
 import { authOptions } from "../api/auth/[...nextauth]/auth";
 
 export default async function ProtectedPage() {
@@ -20,6 +20,7 @@ export default async function ProtectedPage() {
       <Heading mb={4}>保護されたページ</Heading>
       <Text mb={4}>ようこそ、{session.user?.name}さん！</Text>
       <NavButton label="マイページ" href="/protected/my-page" />
+      <NavButton label="ユーザー登録" href="/protected/register" />
       <LogoutButton />
     </FlexCol>
   );

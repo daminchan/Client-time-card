@@ -1,5 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import { TimeCard as TimeCardType } from "@prisma/client";
+
 import {
   formatDate,
   formatTime,

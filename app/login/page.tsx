@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+
 import {
   Box,
   Button,
@@ -13,6 +12,10 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+
+import CustomButton from "@/components/button/CustomButton";
 import FlexCol from "@/components/ui/FlexCol";
 
 export default function LoginPage() {
@@ -81,14 +84,17 @@ export default function LoginPage() {
             <FormLabel>パスワード</FormLabel>
             <Input type="password" name="password" minLength={4} />
           </FormControl>
-          <Button
+          {/* <Button
             type="submit"
             colorScheme="blue"
             width="full"
             isLoading={isLoading}
           >
             ログイン
-          </Button>
+          </Button> */}
+          <CustomButton type="submit" width="full" isLoading={isLoading}>
+            ログイン
+          </CustomButton>
         </FlexCol>
       </form>
     </Box>

@@ -4,8 +4,8 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import CustomButton from "@/components/button/CustomButton";
 import FlexCol from "@/components/ui/FlexCol";
 
-import { useTimeCard } from "../hooks/useTimeCard";
 import TimeCardInfo from "./TimeCardInfo";
+import { useTimeCard } from "../hooks/useTimeCard";
 
 export default function TimeCardManager({ userId }: { userId: string }) {
   const { latestTimeCard, loading, handleClockIn, handleClockOut } =

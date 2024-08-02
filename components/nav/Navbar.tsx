@@ -1,9 +1,11 @@
 "use client";
 
 import { Box, Flex, Button } from "@chakra-ui/react";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+
 import LogoutButton from "../button/LogoutButton";
+import NavButton from "../button/NavButton";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -25,9 +27,7 @@ export default function Navbar() {
           {session ? (
             <LogoutButton />
           ) : (
-            <Link href="/login">
-              <Button colorScheme="blue">ログイン</Button>
-            </Link>
+            <NavButton href="/login" label="ログイン" />
           )}
         </Box>
       </Flex>

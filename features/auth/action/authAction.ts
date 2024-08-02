@@ -1,7 +1,8 @@
 "use server";
 
-import { prisma } from "@/globals/db";
 import { compare } from "bcryptjs";
+
+import { prisma } from "@/globals/db";
 
 export async function login(formData: FormData) {
   const email = formData.get("email") as string;

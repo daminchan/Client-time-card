@@ -1,18 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
-import { TimeCard } from "@/features/timeCard/types";
-import { Box, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
-import * as utils from "@/utils";
-import FlexCol from "@/components/ui/FlexCol";
-import CustomButton from "@/components/button/CustomButton";
-import { useTimeCard } from "@/features/timeCard/hooks/useTimeCard";
 
-interface DashboardDisplayProps {
+import { Box, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+
+import CustomButton from "@/components/button/CustomButton";
+import FlexCol from "@/components/ui/FlexCol";
+import { useTimeCard } from "@/features/timeCard/hooks/useTimeCard";
+import { TimeCard } from "@/features/timeCard/types";
+import * as utils from "@/utils";
+
+interface TimeCardTableProps {
   userId: string;
 }
 
-export default function DashboardDisplay({ userId }: DashboardDisplayProps) {
+export default function TimeCardTable({ userId }: TimeCardTableProps) {
   const {
     monthlyTimeCards,
     loading,
@@ -40,7 +42,7 @@ export default function DashboardDisplay({ userId }: DashboardDisplayProps) {
 
   return (
     <FlexCol>
-      <Box mb={4}>
+      <Box>
         <CustomButton onClick={() => handleMonthChange(-1)} mr={2}>
           前月
         </CustomButton>
@@ -103,7 +105,7 @@ export default function DashboardDisplay({ userId }: DashboardDisplayProps) {
           </Tfoot>
         </Table>
       ) : (
-        <div>この月のタイムカードデータはありません。</div>
+        <Box>この月のタイムカードデータはありません。</Box>
       )}
       <CustomButton onClick={handleDeleteMonthlyTimeCards}>
         月間データ削除

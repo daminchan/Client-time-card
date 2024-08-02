@@ -1,5 +1,4 @@
-import { Button } from "@chakra-ui/react";
-import { ButtonProps } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 
 interface CustomButtonProps extends ButtonProps {
   colorScheme?: string;
