@@ -31,7 +31,7 @@ export function useTimeCard(userId: string) {
 
   function handleActionResult(
     result: { success: boolean; error?: string },
-    action: string
+    action: string,
   ) {
     if (result.success) {
       fetchTimeCards();

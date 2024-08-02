@@ -3,6 +3,7 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 
 import CustomButton from "@/components/button/CustomButton";
 import FlexCol from "@/components/ui/FlexCol";
+
 import { useTimeCard } from "../hooks/useTimeCard";
 import TimeCardInfo from "./TimeCardInfo";
 
@@ -16,14 +17,14 @@ export default function TimeCardManager({ userId }: { userId: string }) {
     <FlexCol>
       <Box>
         <Heading as="h2" size="lg">
-          タイムカード
+          タイムカード履歴
         </Heading>
         {latestTimeCard ? (
           <TimeCardInfo timeCard={latestTimeCard} />
         ) : (
           <Text>タイムカード記録がありません。</Text>
         )}
-        <Flex justify="space-between">
+        <Flex justify="space-between" mt={4}>
           <CustomButton onClick={handleClockIn} colorScheme="blue" width="80px">
             出勤
           </CustomButton>

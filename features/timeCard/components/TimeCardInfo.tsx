@@ -17,7 +17,7 @@ export default function TimeCardInfo({ timeCard }: TimeCardInfoProps) {
       <Text>出勤: {formatTime(timeCard.startTime)}</Text>
       <Text>退勤: {formatTime(timeCard.endTime)}</Text>
       <Text>
-        勤務時間: {calculateWorkingHours(timeCard.startTime, timeCard.endTime)}
+        {calculateWorkingHours(timeCard.startTime, timeCard.endTime)}
         時間
       </Text>
     </Box>

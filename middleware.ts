@@ -11,7 +11,7 @@ export default withAuth(
         return token != null;
       },
     },
-  }
+  },
 );
 
 export const config = { matcher: ["/protected/:path*"] };

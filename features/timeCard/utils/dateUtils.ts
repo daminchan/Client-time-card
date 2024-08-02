@@ -12,14 +12,14 @@ export const formatTime = (date: Date | null): string => {
 
 export const calculateWorkingHours = (
   startTime: Date | null,
-  endTime: Date | null
+  endTime: Date | null,
 ): string => {
   if (!startTime || !endTime) return "0.00";
   return ((endTime.getTime() - startTime.getTime()) / 3600000).toFixed(2);
 };
 
 export const calculateTotalHours = (
-  timeCards: { startTime: Date | null; endTime: Date | null }[]
+  timeCards: { startTime: Date | null; endTime: Date | null }[],
 ): number => {
   return timeCards.reduce((total, card) => {
     if (card.startTime && card.endTime) {

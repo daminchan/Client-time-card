@@ -1,5 +1,4 @@
 "use server";
-import { toZonedTime } from "date-fns-tz";
 import { prisma } from "@/globals/db";
 
 export async function clockIn(userId: string) {
@@ -13,7 +12,6 @@ export async function clockIn(userId: string) {
     },
   });
 
-  // 未終了の作業がある場合はエラーを返す
   if (lastUnfinishedWork) {
     return {
       success: false,
@@ -21,13 +19,12 @@ export async function clockIn(userId: string) {
     };
   }
 
-  const now = toZonedTime(new Date(), "Asia/Tokyo");
+  const now = new Date();
 
-  // 新しい作業記録を作成
   const timeCard = await prisma.timeCard.create({
     data: {
       userId: userId,
-      date: now, // 日付と時間を両方保存
+      date: now,
       startTime: now,
     },
   });
@@ -36,8 +33,6 @@ export async function clockIn(userId: string) {
 }
 
 export async function clockOut(userId: string) {
-  const now = toZonedTime(new Date(), "Asia/Tokyo");
-
   const lastUnfinishedWork = await prisma.timeCard.findFirst({
     where: {
       userId: userId,
@@ -48,13 +43,14 @@ export async function clockOut(userId: string) {
     },
   });
 
-  // 未開始の作業がない場合はエラーを返す
   if (!lastUnfinishedWork) {
     return {
       success: false,
       error: "開始されていない作業があります。まず出勤処理を行ってください。",
     };
   }
+
+  const now = new Date();
 
   const updatedTimeCard = await prisma.timeCard.update({
     where: { id: lastUnfinishedWork.id },
@@ -79,4 +75,17 @@ export async function deleteTimeCard(id: string) {
   } catch (error) {
     return { success: false, error: "タイムカードの削除に失敗しました。" };
   }
+}
+
+export async function getLatestTimeCard(userId: string) {
+  const latestTimeCard = await prisma.timeCard.findFirst({
+    where: {
+      userId: userId,
+    },
+    orderBy: {
+      startTime: "desc",
+    },
+  });
+
+  return latestTimeCard;
 }
