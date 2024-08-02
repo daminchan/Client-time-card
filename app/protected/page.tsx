@@ -1,36 +1,26 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import LogoutButton from "@/components/button/LogoutButton";
-import NavButton from "@/components/nav/NavButton";
 
-export default function ProtectedPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+import FlexCol from "@/components/ui/FlexCol";
+import NavButton from "@/components/button/NavButton";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/auth";
 
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
-
-  if (status === "loading") {
-    return <Box>Loading...</Box>;
-  }
+export default async function ProtectedPage() {
+  const session = await getServerSession(authOptions);
 
   if (!session) {
-    return null;
+    redirect("/login");
   }
 
   return (
-    <Box p={5}>
+    <FlexCol>
       <Heading mb={4}>保護されたページ</Heading>
       <Text mb={4}>ようこそ、{session.user?.name}さん！</Text>
       <NavButton label="マイページ" href="/protected/my-page" />
       <LogoutButton />
-    </Box>
+    </FlexCol>
   );
 }

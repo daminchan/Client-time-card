@@ -17,7 +17,7 @@ export default function TimeCardManager({ userId }: { userId: string }) {
     <FlexCol>
       <Box>
         <Heading as="h2" size="lg">
-          タイムカード履歴
+          タイムカード
         </Heading>
         {latestTimeCard ? (
           <TimeCardInfo timeCard={latestTimeCard} />

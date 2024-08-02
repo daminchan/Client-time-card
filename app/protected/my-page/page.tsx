@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import TimeCardManager from "@/features/timeCard/components/TimeCardManager";
 import FlexCol from "@/components/ui/FlexCol";
 import { Box } from "@chakra-ui/react";
+import NavButton from "@/components/button/NavButton";
 
 export default async function MyPage() {
   const session = await getServerSession(authOptions);
@@ -13,7 +14,7 @@ export default async function MyPage() {
   }
 
   return (
-    <FlexCol align="center" justify="center" py={6}>
+    <FlexCol>
       <h1 className="text-2xl font-bold mb-4">マイページ</h1>
       <Box
         width="100%"
@@ -25,6 +26,7 @@ export default async function MyPage() {
       >
         <TimeCardManager userId={session.user.id} />
       </Box>
+      <NavButton href="/protected/my-page/dashboard" label="ダッシュボード" />
     </FlexCol>
   );
 }

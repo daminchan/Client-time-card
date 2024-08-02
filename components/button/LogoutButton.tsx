@@ -1,12 +1,13 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import { Button } from "@chakra-ui/react";
+
+import CustomButton from "./CustomButton";
 
 export default function LogoutButton() {
   return (
-    <Button onClick={() => signOut({ callbackUrl: "/" })} colorScheme="red">
+    <CustomButton width="150px" onClick={() => signOut({ callbackUrl: "/" })}>
       ログアウト
-    </Button>
+    </CustomButton>
   );
 }

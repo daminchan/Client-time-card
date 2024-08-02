@@ -1,5 +1,7 @@
 "use server";
 import { prisma } from "@/globals/db";
+import { TimeCard } from "../types";
+import { revalidatePath } from "next/cache";
 
 export async function clockIn(userId: string) {
   const lastUnfinishedWork = await prisma.timeCard.findFirst({
@@ -68,15 +70,6 @@ export async function getTimeCards(userId: string) {
   return timeCards;
 }
 
-export async function deleteTimeCard(id: string) {
-  try {
-    await prisma.timeCard.delete({ where: { id } });
-    return { success: true };
-  } catch (error) {
-    return { success: false, error: "タイムカードの削除に失敗しました。" };
-  }
-}
-
 export async function getLatestTimeCard(userId: string) {
   const latestTimeCard = await prisma.timeCard.findFirst({
     where: {
@@ -88,4 +81,76 @@ export async function getLatestTimeCard(userId: string) {
   });
 
   return latestTimeCard;
+}
+
+export async function getTimeCardsForMonth(
+  userId: string,
+  year: number,
+  month: number,
+): Promise<TimeCard[]> {
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0);
+
+  const timeCards = await prisma.timeCard.findMany({
+    where: {
+      userId: userId,
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+    },
+    orderBy: {
+      date: "desc",
+    },
+  });
+
+  return timeCards;
+}
+
+export async function deleteTimeCardsForMonth(
+  userId: string,
+  year: number,
+  month: number,
+) {
+  const startDate = new Date(year, month - 1, 1);
+  const endDate = new Date(year, month, 0);
+
+  try {
+    await prisma.timeCard.deleteMany({
+      where: {
+        userId: userId,
+        date: {
+          gte: startDate,
+          lte: endDate,
+        },
+      },
+    });
+    // revalidatePath("/dashboard");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to delete time cards for month:", error);
+    return {
+      success: false,
+      error: "Failed to delete time cards for the specified month.",
+    };
+  }
+}
+
+export async function deleteTimeCard(userId: string, timeCardId: string) {
+  try {
+    await prisma.timeCard.delete({
+      where: {
+        id: timeCardId,
+        userId: userId,
+      },
+    });
+    // revalidatePath("/dashboard");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to delete time card:", error);
+    return {
+      success: false,
+      error: "Failed to delete the specified time card.",
+    };
+  }
 }

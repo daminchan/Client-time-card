@@ -15,7 +15,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   size = "lg",
   type = "button",
   color = "white", // デフォルトの文字色を白に設定
-  width = "100%",
+  width = "150px",
   isDisabled = false, // デフォルトで無効化されていない
   ...props
 }) => {
