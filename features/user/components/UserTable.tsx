@@ -55,11 +55,7 @@ const UserTable: React.FC = () => {
                 <Td>{user.email}</Td>
                 <Td>{user.role}</Td>
                 <Td>
-                  <CustomButton
-                    colorScheme="red"
-                    size="sm"
-                    onClick={() => handleDeleteUser(user.id)}
-                  >
+                  <CustomButton onClick={() => handleDeleteUser(user.id)}>
                     削除
                   </CustomButton>
                 </Td>

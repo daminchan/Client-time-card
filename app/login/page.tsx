@@ -4,12 +4,10 @@ import { useState } from "react";
 
 import {
   Box,
-  Button,
   FormControl,
   FormLabel,
   Input,
   Heading,
-  Text,
   useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
@@ -84,14 +82,6 @@ export default function LoginPage() {
             <FormLabel>パスワード</FormLabel>
             <Input type="password" name="password" minLength={4} />
           </FormControl>
-          {/* <Button
-            type="submit"
-            colorScheme="blue"
-            width="full"
-            isLoading={isLoading}
-          >
-            ログイン
-          </Button> */}
           <CustomButton type="submit" width="full" isLoading={isLoading}>
             ログイン
           </CustomButton>

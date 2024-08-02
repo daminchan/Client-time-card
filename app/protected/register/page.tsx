@@ -3,7 +3,6 @@ import { useState } from "react";
 
 import {
   Box,
-  Button,
   FormControl,
   FormLabel,
   Input,
@@ -13,6 +12,7 @@ import {
 
 import FlexCol from "@/components/ui/FlexCol";
 import { registerUser } from "@/features/register/action/registerAction";
+import CustomButton from "@/components/button/CustomButton";
 export default function RegisterPage() {
   const [message, setMessage] = useState("");
 
@@ -42,13 +42,17 @@ export default function RegisterPage() {
             <FormLabel>名前</FormLabel>
             <Input type="text" name="name" />
           </FormControl>
-          <Button type="submit" colorScheme="blue" width="full">
-            登録
-          </Button>
+          <CustomButton type="submit" width="full">
+            ログイン
+          </CustomButton>
         </FlexCol>
       </form>
       {message && (
-        <Text mt={4} color={message.includes("失敗") ? "red.500" : "green.500"}>
+        <Text
+          mt={4}
+          color={message.includes("失敗") ? "red.500" : "green.500"}
+          fontWeight="bold"
+        >
           {message}
         </Text>
       )}

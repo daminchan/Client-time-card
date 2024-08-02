@@ -1,4 +1,4 @@
-import { Heading, Text } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
@@ -17,7 +17,6 @@ export default async function ProtectedPage() {
 
   return (
     <FlexCol>
-      <Heading mb={4}>保護されたページ</Heading>
       <Text mb={4}>ようこそ、{session.user?.name}さん！</Text>
       <NavButton label="マイページ" href="/protected/my-page" />
       <NavButton label="ユーザー登録" href="/protected/register" />

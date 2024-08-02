@@ -1,7 +1,6 @@
 "use client";
 
 import { Box, Flex, Button } from "@chakra-ui/react";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 import LogoutButton from "../button/LogoutButton";
@@ -13,16 +12,10 @@ export default function Navbar() {
   return (
     <Box bg="gray.100" px={4}>
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-        <Box>
-          <Link href="/">
-            <Button variant="ghost">ホーム</Button>
-          </Link>
-          {session && (
-            <Link href="/protected">
-              <Button variant="ghost">保護されたページ</Button>
-            </Link>
-          )}
-        </Box>
+        <Flex gap={2}>
+          <NavButton href="/" label="ホーム" />
+          {session && <NavButton href="/protected" label="マイページ" />}
+        </Flex>
         <Box>
           {session ? (
             <LogoutButton />

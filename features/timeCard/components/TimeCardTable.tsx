@@ -33,7 +33,7 @@ export default function TimeCardTable({ userId }: TimeCardTableProps) {
 
   // タイムカードを日付の昇順（古い順）にソート
   const sortedTimeCards = [...monthlyTimeCards].sort(
-    (a, b) => a.date.getTime() - b.date.getTime(),
+    (a, b) => a.date.getTime() - b.date.getTime()
   );
 
   if (loading) {
@@ -72,11 +72,7 @@ export default function TimeCardTable({ userId }: TimeCardTableProps) {
                   {utils.calculationUtils.calculateWorkingHours(card)} 時間
                 </Td>
                 <Td>
-                  <CustomButton
-                    onClick={() => handleDeleteTimeCard(card.id)}
-                    size="sm"
-                    colorScheme="red"
-                  >
+                  <CustomButton onClick={() => handleDeleteTimeCard(card.id)}>
                     削除
                   </CustomButton>
                 </Td>
